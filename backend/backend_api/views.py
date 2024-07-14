@@ -22,9 +22,7 @@ class AccountDetailEncoder(ModelEncoder):
         "last_name",
         "username",
         "password",
-        "is_active",
-        "date_joined",
-        "censored",
+        "score",
     ]
 
 
@@ -93,13 +91,13 @@ def api_list_accounts(request):
             return response
 
 
-def update_censors(request, pk):
+def update_score(request, pk):
     if request.method == "PUT":
         account = User.objects.get(id=pk)
         content = json.loads(request.body)
-        ncensor = content["censored"]
+        nscore = content["score"]
 
-        User.objects.filter(id=pk).update(censored=ncensor)
+        User.objects.filter(id=pk).update(score=nscore)
 
         account = User.objects.get(id=pk)
         return JsonResponse(

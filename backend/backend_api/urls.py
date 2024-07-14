@@ -7,12 +7,12 @@ from backend_api.views import (
     neo_logout,
     # get_some_data,
     # check_user,
-    update_censors,
+    update_score,
 )
 
 urlpatterns = [
     path("login/", neo_authenticate, name="login"),
-    path("censor/<int:pk>", update_censors, name="censors"),
+    path("score/<int:pk>", update_score, name="score"),
     path("logout/", neo_logout, name="logout"),
     path("accounts/", api_list_accounts, name="accounts_list"),
     path("accounts/<int:pk>", api_show_account, name="account_detail"),
