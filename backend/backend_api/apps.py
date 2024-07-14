@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class UserRestConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "backend_rest"
+    name = "backend_api"

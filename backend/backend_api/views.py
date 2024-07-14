@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
-import djwto.authentication as auth
+# import djwto.authentication as auth
 from .models import User
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
@@ -38,19 +38,19 @@ def api_user_token(request):
     return response
 
 
-@auth.jwt_login_required
-def get_some_data(request):
-    token_data = request.payload
-    response = JsonResponse({"token": token_data["user"]})
-    return response
+# @auth.jwt_login_required
+# def get_some_data(request):
+#     token_data = request.payload
+#     response = JsonResponse({"token": token_data["user"]})
+#     return response
 
 
-@auth.jwt_login_required
-def check_user(request):
-    if request.user is not None:
-        return JsonResponse({"authenticated": request.user.is_authenticated})
-    else:
-        return JsonResponse({"message": "not found"})
+# @auth.jwt_login_required
+# def check_user(request):
+#     if request.user is not None:
+#         return JsonResponse({"authenticated": request.user.is_authenticated})
+#     else:
+#         return JsonResponse({"message": "not found"})
 
 
 @require_http_methods(["GET", "POST"])

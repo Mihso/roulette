@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,16 +27,20 @@ SECRET_KEY = 'django-insecure-y2mgy_4k)t$ciso)h!4_-(=*(2abu%^8+oxmc35&lxu2@1c^9s
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
+# DJWTO_MODE = 'TWO-COOKIES'
+# DJWTO_CSRF = False
+# DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
+AUTH_USER_MODEL = "backend_api.User"
 
-
+# DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'backend_api.apps.UserRestConfig',
     'djwto',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -49,6 +56,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+LOGIN_URL = "login"
+LOGOUT_URL = "logout"
 
 ROOT_URLCONF = 'backend.urls'
 
