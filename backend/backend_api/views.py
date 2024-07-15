@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 # import djwto.authentication as auth
-from .models import User
+from .models import User, Account
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
 import json
@@ -54,7 +54,7 @@ def api_user_token(request):
 @require_http_methods(["GET", "POST"])
 def api_list_accounts(request):
     if request.method == "GET":
-        attendees = User.objects.all()
+        attendees = Account.objects.all()
         return JsonResponse(
             {"accounts": attendees},
             encoder=AccountListEncoder,
@@ -67,7 +67,7 @@ def api_list_accounts(request):
             nfirstname = content["first_name"]
             nlastname = content["last_name"]
             nemail = content["email"]
-            account = User.objects.create_user(
+            account = Account.objects.create_user(
                 username=nusername,
                 password=npassword,
                 email=nemail,
@@ -99,7 +99,7 @@ def update_score(request, pk):
 
         User.objects.filter(id=pk).update(score=nscore)
 
-        account = User.objects.get(id=pk)
+        account = Account.objects.get(id=pk)
         return JsonResponse(
             account,
             encoder=AccountDetailEncoder,
@@ -112,11 +112,11 @@ def update_score(request, pk):
 @require_http_methods(["DELETE", "PUT", "GET"])
 def api_show_account(request, pk):
     if request.method == "GET":
-        account = User.objects.get(id=pk)
+        account = Account.objects.get(id=pk)
         return JsonResponse(account, encoder=AccountDetailEncoder, safe=False)
     elif request.method == "DELETE":
-        count, _ = User.objects.filter(id=pk).delete()
-        User.objects.filter(id=pk).delete()
+        count, _ = Account.objects.filter(id=pk).delete()
+        Account.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
     else:
         content = json.loads(request.body)
@@ -134,7 +134,7 @@ def api_show_account(request, pk):
             last_name=nlastname,
         )
 
-        account = User.objects.get(id=pk)
+        account = Account.objects.get(id=pk)
         return JsonResponse(
             account,
             encoder=AccountDetailEncoder,

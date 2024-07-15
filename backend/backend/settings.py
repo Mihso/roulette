@@ -37,12 +37,9 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-# DJWTO_MODE = 'TWO-COOKIES'
-# DJWTO_CSRF = False
-# DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
-AUTH_USER_MODEL = "backend_api.User"
+AUTH_USER_MODEL = "backend_api.account"
 
-# DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
+DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 # Application definition
 
 INSTALLED_APPS = [
@@ -67,9 +64,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-
-LOGIN_URL = "login"
-LOGOUT_URL = "logout"
 
 ROOT_URLCONF = 'backend.urls'
 

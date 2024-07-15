@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import SignupPage from './signUp';
+import SubmitScore from './submitScore';
 
 function Home() {
   return (
@@ -17,6 +19,7 @@ function Home() {
         >
           Learn React
         </a>
+        <SubmitScore score={100}></SubmitScore>
       </header>
     </div>
   );

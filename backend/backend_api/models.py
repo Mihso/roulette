@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-class User(AbstractUser):
+class Account(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
@@ -10,4 +10,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
-    score = models.IntegerField(default = 0)
+
+class User(models.Model):
+    username = models.CharField(max_length=100)
+    score = models.IntegerField(default = 100)
