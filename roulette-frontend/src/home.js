@@ -1,25 +1,56 @@
-import logo from './logo.svg';
 import './App.css';
-import SignupPage from './signUp';
+import { useEffect, useState } from 'react';
 import SubmitScore from './submitScore';
 
 function Home() {
+  const [recipes, setrecipes] = useState([]);
+  const [id, setId] = useState(0);
+
+  useEffect(() => {
+    async function getAccounts() {
+      const Url = `http://localhost:8000/api/recipes/`
+      const autoResponse = await fetch(Url, { method: "get", mode: "cors" })
+
+      if (autoResponse.ok) {
+        const autoData = await autoResponse.json()
+        console.log(autoData);
+        setrecipes(autoData.recipess)
+      }
+    } getAccounts();
+  }, [])
+
+  function handleClick(event){
+    setId(event)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <SubmitScore score={100}></SubmitScore>
+      <h1>Simple Recipe List</h1>
+        <div className='gridder'>
+        <div className='lister'>
+        {recipes.length > 0 ? (
+          <div>
+        {recipes.map((recipe, idx)=>{
+          const date = new Date(recipe.created);
+          return(
+            <div key={idx} >
+              <button className="button" value={recipe.id} onClick={(e) => handleClick(e.target.value)}>
+              Name: {recipe.name}
+              <br></br>
+              Created on: {date.getMonth()}, {date.getDate()}, {date.getUTCFullYear()}
+              </button>
+              </div>
+          );
+        }
+
+        )}</div>): <div>No Recipes</div>
+      }
+      </div>
+      <div className='details'>
+        <SubmitScore key={id} id={id}></SubmitScore>
+      </div>
+      </div>
       </header>
     </div>
   );

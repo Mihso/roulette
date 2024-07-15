@@ -10,7 +10,10 @@ class Account(AbstractUser):
     password = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    score = models.IntegerField(default=100)
 
-class User(models.Model):
-    username = models.CharField(max_length=100)
-    score = models.IntegerField(default = 100)
+class Recipe(models.Model):
+    name = models.CharField(max_length=100)
+    details = models.CharField(max_length=50000)
+    time = models.IntegerField(max_length=1440, default=60)
+    created = models.DateTimeField(auto_now_add=True)

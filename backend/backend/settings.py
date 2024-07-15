@@ -37,6 +37,10 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+os.environ["DJWTO_SIGNING_KEY"] = "C3420653A1A3DA963DA8325416E7093EF1A1BC504BF20D4293B6F5CBFD03ABB2"
+DJWTO_MODE = 'TWO-COOKIES'
+DJWTO_CSRF = True
+DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
 AUTH_USER_MODEL = "backend_api.account"
 
 DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
@@ -64,6 +68,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
+
+LOGIN_URL = "login"
+LOGOUT_URL = "logout"
 
 ROOT_URLCONF = 'backend.urls'
 
