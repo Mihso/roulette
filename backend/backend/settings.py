@@ -27,7 +27,16 @@ SECRET_KEY = 'django-insecure-y2mgy_4k)t$ciso)h!4_-(=*(2abu%^8+oxmc35&lxu2@1c^9s
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
+
 # DJWTO_MODE = 'TWO-COOKIES'
 # DJWTO_CSRF = False
 # DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
@@ -41,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'backend_api.apps.UserRestConfig',
+    'corsheaders',
     'djwto',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -55,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 LOGIN_URL = "login"
