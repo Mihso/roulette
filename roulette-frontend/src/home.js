@@ -8,12 +8,11 @@ function Home() {
 
   useEffect(() => {
     async function getAccounts() {
-      const Url = `http://localhost:8000/api/recipes/`
+      const Url = `${process.env.REACT_APP_BACKEND_URL}/api/recipes/`
       const autoResponse = await fetch(Url, { method: "get", mode: "cors" })
 
       if (autoResponse.ok) {
         const autoData = await autoResponse.json()
-        console.log(autoData);
         setrecipes(autoData.recipess)
       }
     } getAccounts();

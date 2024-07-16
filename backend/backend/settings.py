@@ -30,17 +30,14 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    os.environ.get("FRONTEND_URL"),
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
+    os.environ.get("FRONTEND_URL"),
 ]
 
-os.environ["DJWTO_SIGNING_KEY"] = "C3420653A1A3DA963DA8325416E7093EF1A1BC504BF20D4293B6F5CBFD03ABB2"
-DJWTO_MODE = 'TWO-COOKIES'
-DJWTO_CSRF = True
-DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
+
 AUTH_USER_MODEL = "backend_api.account"
 
 DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"

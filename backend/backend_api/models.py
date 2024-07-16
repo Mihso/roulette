@@ -15,5 +15,5 @@ class Account(AbstractUser):
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
     details = models.CharField(max_length=50000)
-    time = models.IntegerField(max_length=1440, default=60)
+    time = models.IntegerField( default=60)
     created = models.DateTimeField(auto_now_add=True)

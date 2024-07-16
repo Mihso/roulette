@@ -7,7 +7,7 @@ function SubmitScore(id) {
 
   useEffect(() => {
     async function getAccounts() {
-      const Url = `http://localhost:8000/api/recipes/${id.id}`
+      const Url = `${process.env.REACT_APP_BACKEND_URL}/api/recipes/${id.id}`
       const autoResponse = await fetch(Url, { method: "get", mode: "cors" })
 
       if (autoResponse.ok) {
