@@ -14,4 +14,4 @@ COPY backend_api backend_api
 COPY common common
 
 RUN pip install -r requirements.txt
-CMD python manage.py makemigrations && python manage.py migrate && gunicorn backend.wsgi --bind 0.0.0.0:$PORT --log-file -
+CMD python manage.py makemigrations && python manage.py migrate && gunicorn backend.wsgi --log-file -
