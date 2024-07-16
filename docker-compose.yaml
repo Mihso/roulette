@@ -1,0 +1,27 @@
+volumes:
+    roulette-frontend:
+        external: true
+services:
+    react:
+        image: node:lts-bullseye
+        command: /bin/bash run.sh
+        working_dir: /app
+        volumes:
+            - ./roulette-frontend:/app
+        ports:
+            - "3000:3000"
+        environment:
+            HOST_OS: ${OS}
+            HOST: "0.0.0.0"
+            REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
+    backend:
+        build:
+            context: ./backend
+            dockerfile: ./Dockerfile.dev
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./backend:/app
+        environment:
+            DEBUG: "True"
+            FRONTEND_URL: ${FRONTEND_URL}
