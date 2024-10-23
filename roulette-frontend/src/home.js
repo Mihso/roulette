@@ -9,11 +9,15 @@ function Home() {
   useEffect(() => {
     async function getAccounts() {
       const Url = `${process.env.REACT_APP_BACKEND_URL}/api/recipes/`
+      try{
       const autoResponse = await fetch(Url, { method: "get", mode: "cors" })
-
       if (autoResponse.ok) {
         const autoData = await autoResponse.json()
-        setrecipes(autoData.recipess)
+        setrecipes(autoData.recipes)
+      }
+      }
+      catch(e){
+        setrecipes([{"id": 1, "name": "pasta", "created": Date.now()}, {"id": 2, "name": "pizza", "created": Date.now()}])
       }
     } getAccounts();
   }, [])

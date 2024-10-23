@@ -8,11 +8,17 @@ function SubmitScore(id) {
   useEffect(() => {
     async function getAccounts() {
       const Url = `${process.env.REACT_APP_BACKEND_URL}/api/recipes/${id.id}`
+      try{
       const autoResponse = await fetch(Url, { method: "get", mode: "cors" })
 
       if (autoResponse.ok) {
         const autoData = await autoResponse.json()
         setAccounts(autoData)
+      }
+      }
+      catch(e){
+        var temp = [{"id": 1, "name": "pasta", "created": Date.now(), "details": "Nothing"}, {"id": 2, "name": "pizza", "created": Date.now(), "details": "lots of sauce"}];
+        setAccounts(temp[id.id - 1])
       }
     } getAccounts();
   }, [])

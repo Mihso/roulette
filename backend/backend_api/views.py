@@ -28,7 +28,7 @@ def api_list_recipes(request):
     if request.method == "GET":
         Recipes = Recipe.objects.all()
         return JsonResponse(
-            {"recipess": Recipes},
+            {"recipes": Recipes},
             encoder=RecipeListEncoder,
         )
 
