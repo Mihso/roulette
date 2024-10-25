@@ -17,3 +17,13 @@ class Recipe(models.Model):
     details = models.CharField(max_length=50000)
     time = models.IntegerField( default=60)
     created = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name
+
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=100)
+    details = models.CharField(max_length=50000)
+    unit = models.CharField(max_length=100)
+    amount = models.CharField(max_length=1000)
+    recipes = models.ForeignKey(Recipe, on_delete=models.DO_NOTHING)
